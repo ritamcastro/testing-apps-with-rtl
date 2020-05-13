@@ -79,5 +79,9 @@ describe('Calculator', () => {
                 done()
             })
         })
+        
+        it('subtracts, multiplies and divides two numbers', () =>{
+            // TODO: Feel free to give it a try!
+        })
     })
 })
