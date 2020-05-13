@@ -1,8 +1,13 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import '@testing-library/jest-dom/extend-expect'
-import { render } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { render, waitFor } from '@testing-library/react'
 import Calculator from '../../../src/features/calculator/calculator'
+import { add as mockedAdd } from '../../../src/services/math'
+
+jest.mock('../../../src/services/math', () => ({
+    add: jest.fn()
+}))
 
 describe('Calculator', () => {
 
@@ -45,15 +50,33 @@ describe('Calculator', () => {
 
         it('shows the close button', () => {
             const { getByLabelText } = render(<Calculator />)
-
-            const close = getByLabelText(/close calculator/i)
-            expect(close).toBeInTheDocument()
+            expect(getByLabelText(/close calculator/i)).toBeInTheDocument()
         })
 
         it('shows the clear button', () => {
-            const { getByLabelText, getByRole } = render(<Calculator />)
-            
+            const { getByRole } = render(<Calculator />)
             expect(getByRole('button', { name: /clear/i })).toBeInTheDocument()
+        })
+    })
+
+    describe('calculations', () => {
+        it('adds two numbers', done => {
+            const { getByRole, getByLabelText } = render(<Calculator />)
+
+            const dummyResult = 42
+            mockedAdd.mockImplementation(() => dummyResult)
+
+            userEvent.click(getByRole('button', { name: /3/i }))
+            userEvent.click(getByRole('button', { name: /\+/i }))
+            userEvent.click(getByRole('button', { name: /5/i }))
+            userEvent.click(getByRole('button', { name: /=/i }))
+
+            waitFor(() => {
+                expect(mockedAdd).toHaveBeenCalledTimes(1)
+                expect(mockedAdd).toHaveBeenCalledWith(3, 5)
+                expect(getByLabelText(/result/i)).toHaveTextContent(dummyResult)
+                done()
+            })
         })
     })
 })
