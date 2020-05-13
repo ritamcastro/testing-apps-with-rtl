@@ -1,5 +1,6 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
+import userEvent from '@testing-library/user-event'
 import { render } from '@testing-library/react'
 import Welcome from '../../../src/features/greetingz/welcome'
  
@@ -29,9 +30,19 @@ describe('Welcome screen', () => {
 
     it('calls the onSubmit with the username', () => {
         // Given
-       
+        const handleSubmit = jest.fn()
+        const username = 'Mickey Mouse'
+        const goto = 'Disneyland'
+        const { getByLabelText, getByText, getByRole } = render(<Welcome onSubmit={handleSubmit} goto={goto}/>)
+
         // When
-       
+        userEvent.type(getByLabelText(/what is your name/i), username)
+
+        expect(getByRole('button', { name: /let's go!/i })).toBeEnabled()
+        userEvent.click(getByText(/let's go!/i))
+
         // Then
+        expect(handleSubmit).toHaveBeenCalledTimes(1)
+        expect(handleSubmit).toHaveBeenCalledWith(username)
     })
 })
