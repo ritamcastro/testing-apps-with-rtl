@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import Welcome from './features/greetingz/welcome'
+// import Welcome from './features/greetingz/welcome'
+import Calculator from './features/calculator/calculator'
 
 const App = () => {
 
@@ -10,8 +11,9 @@ const App = () => {
 
     return (
         <div>
-            <Welcome onSubmit={onWelcoming} />
-            {username.length > 0 ? <p> Welcome, {username}!</p> : null}
+            {/* <Welcome onSubmit={onWelcoming} />
+            {username.length > 0 ? <p> Welcome, {username}!</p> : null} */}
+            <Calculator />
         </div>
     )
 }
