@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const Welcome = ({ }) => {
+const Welcome = ({ onSubmit }) => {
 
     const [username, setUsername] = useState('')
     const [isEnabled, setEnable] = useState(false)
@@ -9,10 +9,15 @@ const Welcome = ({ }) => {
         username.length > 0 ? setEnable(true) : null
     }, [username])
 
+    const handleSubmit = event => {
+        event.preventDefault()
+        onSubmit(username)
+    }
+
     return (
         <div>
             <h1>Welcome!</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="username-field">What is your name?</label>
                     <input id="username-field" name="username" required onChange={(e) => setUsername(e.target.value)} />
