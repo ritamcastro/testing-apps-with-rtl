@@ -39,12 +39,18 @@ const Calculator = () => {
         setInput(undefined)
     }
     
+    const clear = () => {
+        setInput(undefined)
+        setResult(undefined)
+        setOperation(undefined)
+    }
+
     return (
         <div>
             <div>
                 <button aria-label='close calculator'>X</button>
             </div>
-            <Display result={result} operation={operation} input={input} />
+            <Display result={result} operation={operation} input={input} onClear={() => clear()}/>
             <Keypad onGetInput={getInput} />
             <Operations onGetInput={doOperation} onCalculate={calculate}></Operations>
         </div>

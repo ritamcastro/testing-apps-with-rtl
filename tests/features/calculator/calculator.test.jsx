@@ -12,36 +12,20 @@ jest.mock('../../../src/services/math', () => ({
 describe('Calculator', () => {
 
     describe('initial render', () => {
-        it('shows the numbers from 0-9', () => {
+        it('shows numbers', () => {
             const { getByRole } = render(<Calculator />)
-
-            expect(getByRole('button', { name: /0/i })).toBeInTheDocument()
-            expect(getByRole('button', { name: /1/i })).toBeInTheDocument()
-            expect(getByRole('button', { name: /2/i })).toBeInTheDocument()
-            expect(getByRole('button', { name: /3/i })).toBeInTheDocument()
             expect(getByRole('button', { name: /4/i })).toBeInTheDocument()
-            expect(getByRole('button', { name: /5/i })).toBeInTheDocument()
-            expect(getByRole('button', { name: /6/i })).toBeInTheDocument()
-            expect(getByRole('button', { name: /7/i })).toBeInTheDocument()
-            expect(getByRole('button', { name: /8/i })).toBeInTheDocument()
-            expect(getByRole('button', { name: /9/i })).toBeInTheDocument()
+            expect(getByRole('button', { name: /2/i })).toBeInTheDocument()
         })
 
-        it('shows the operations and the ,', () => {
+        it('shows operations', () => {
             const { getByRole } = render(<Calculator />)
-
-            expect(getByRole('button', { name: /\+/i })).toBeInTheDocument()
-            expect(getByRole('button', { name: /-/i })).toBeInTheDocument()
             expect(getByRole('button', { name: /\*/i })).toBeInTheDocument()
             expect(getByRole('button', { name: /:/i })).toBeInTheDocument()
-            expect(getByRole('button', { name: /=/i })).toBeInTheDocument()
-            expect(getByRole('button', { name: /,/i })).toBeInTheDocument()
         })
 
         it('shows the current result and expression', () => {
             const { getByLabelText } = render(<Calculator />)
-
-            expect(getByLabelText(/result/i)).toBeInTheDocument()
             expect(getByLabelText(/result/i)).toHaveTextContent('0')
 
             expect(getByLabelText(/expression/i)).toBeInTheDocument()
