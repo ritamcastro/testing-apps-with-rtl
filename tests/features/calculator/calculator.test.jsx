@@ -3,11 +3,6 @@ import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 import { render, waitFor } from '@testing-library/react'
 import Calculator from '../../../src/features/calculator/calculator'
-import { add as mockedAdd } from '../../../src/services/math'
-
-jest.mock('../../../src/services/math', () => ({
-    add: jest.fn()
-}))
 
 describe('Calculator', () => {
 
@@ -43,12 +38,9 @@ describe('Calculator', () => {
         })
     })
 
-    describe('calculations', () => {
+    describe('real calculations ', () => {
         it('adds two numbers', done => {
             const { getByRole, getByLabelText, queryByText } = render(<Calculator />)
-
-            const dummyResult = 42
-            mockedAdd.mockImplementation(() => dummyResult)
 
             userEvent.click(getByRole('button', { name: /3/i }))
             userEvent.click(getByRole('button', { name: /\+/i }))
@@ -56,14 +48,29 @@ describe('Calculator', () => {
             userEvent.click(getByRole('button', { name: /=/i }))
 
             waitFor(() => {
-                expect(mockedAdd).toHaveBeenCalledTimes(1)
-                expect(mockedAdd).toHaveBeenCalledWith(3, 5)
-                expect(getByLabelText(/result/i)).toHaveTextContent(dummyResult)
+                expect(getByLabelText(/result/i)).toHaveTextContent(8)
                 expect(queryByText(/3 \+ 5/i)).not.toBeInTheDocument()
                 done()
             })
         })
-        
+
+        it('adds three numbers, carrying the result', done => {
+            const { getByRole, getByLabelText } = render(<Calculator />)
+
+            userEvent.click(getByRole('button', { name: /3/i }))
+            userEvent.click(getByRole('button', { name: /\+/i }))
+            userEvent.click(getByRole('button', { name: /4/i }))
+            userEvent.click(getByRole('button', { name: /\=/i }))
+            userEvent.click(getByRole('button', { name: /\+/i }))
+            userEvent.click(getByRole('button', { name: /1/i }))
+            userEvent.click(getByRole('button', { name: /=/i }))
+
+            waitFor(() => {
+                expect(getByLabelText(/result/i)).toHaveTextContent(8)
+                done()
+            })
+        })
+
         it('subtracts, multiplies and divides two numbers', () =>{
             // TODO: Feel free to give it a try!
         })

@@ -22,19 +22,27 @@ const Calculator = () => {
         }
     }
 
-    const getInput = (value) => {
+
+    const getInput = (e) => {
         if (input == undefined) {
-            setInput(value)
+            setInput(e)
+        } else {
+            const prev = input
+            setInput(prev.concat(e))
         }
+
         if (result && operation == undefined) {
             setResult(undefined)
         }
     }
 
-    const doOperation = (operationName) => {
-        setOperation(operationName)
+    const doOperation = (e) => {
+        setOperation(e)
         if (result == undefined) {
             setResult(input)
+        } else {
+            const prev = result
+            setResult(prev)
         }
         setInput(undefined)
     }
