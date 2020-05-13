@@ -61,7 +61,7 @@ describe('Calculator', () => {
 
     describe('calculations', () => {
         it('adds two numbers', done => {
-            const { getByRole, getByLabelText } = render(<Calculator />)
+            const { getByRole, getByLabelText, queryByText } = render(<Calculator />)
 
             const dummyResult = 42
             mockedAdd.mockImplementation(() => dummyResult)
@@ -75,6 +75,7 @@ describe('Calculator', () => {
                 expect(mockedAdd).toHaveBeenCalledTimes(1)
                 expect(mockedAdd).toHaveBeenCalledWith(3, 5)
                 expect(getByLabelText(/result/i)).toHaveTextContent(dummyResult)
+                expect(queryByText(/3 \+ 5/i)).not.toBeInTheDocument()
                 done()
             })
         })
