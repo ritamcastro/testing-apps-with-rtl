@@ -4,8 +4,12 @@ const Calculator = () => {
     return (
         <div>
             <div>
+                <button aria-label='close calculator'>X</button>
+            </div>
+            <div>
                 <p aria-label='expression'>0</p>
                 <h2 aria-label='result'>0</h2>
+                <button aria-label='clear'>CLC</button>
             </div>
             <div>
                 <button>0</button>

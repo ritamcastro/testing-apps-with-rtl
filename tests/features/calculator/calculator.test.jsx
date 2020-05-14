@@ -33,7 +33,9 @@ describe('Calculator', () => {
             expect(getByRole('button', { name: /,/i })).toBeInTheDocument()
         })
 
-        it ('shows the current result and expression', () => {
+        it('shows the current result and expression', () => {
+            const { getByLabelText } = render(<Calculator />)
+
             expect(getByLabelText(/result/i)).toBeInTheDocument()
             expect(getByLabelText(/result/i)).toHaveTextContent('0')
 
@@ -41,9 +43,17 @@ describe('Calculator', () => {
             expect(getByLabelText(/expression/i)).toHaveTextContent('0')
         })
 
-        it ('shows the close button', () => {
+        it('shows the close button', () => {
+            const { getByLabelText } = render(<Calculator />)
 
+            const close = getByLabelText(/close calculator/i)
+            expect(close).toBeInTheDocument()
+        })
 
+        it('shows the clear button', () => {
+            const { getByLabelText, getByRole } = render(<Calculator />)
+            
+            expect(getByRole('button', { name: /clear/i })).toBeInTheDocument()
         })
     })
 })
