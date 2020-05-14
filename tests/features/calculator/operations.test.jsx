@@ -5,14 +5,14 @@ import Operations from "../../../src/features/calculator/operations"
 
 
 describe('Operations', () => {
-    it('shows the operations and the , key', () => {
-        const { getByRole } = render(<Operations />)
+    it('shows the operations', () => {
+        const { getByRole, getByLabelText } = render(<Operations />)
 
         expect(getByRole('button', { name: /\+/i })).toBeInTheDocument()
         expect(getByRole('button', { name: /-/i })).toBeInTheDocument()
         expect(getByRole('button', { name: /\*/i })).toBeInTheDocument()
         expect(getByRole('button', { name: /:/i })).toBeInTheDocument()
         expect(getByRole('button', { name: /=/i })).toBeInTheDocument()
-        expect(getByRole('button', { name: /,/i })).toBeInTheDocument()
+        expect(getByLabelText(/clear/i)).toBeInTheDocument()
     })
 })

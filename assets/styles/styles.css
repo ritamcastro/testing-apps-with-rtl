@@ -1,0 +1,118 @@
+.grid-container {
+    width: 400px;
+    height: 600px;
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    bottom: 15%;
+    right: 15%;
+    background: thistle;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.1fr 0.25fr 1fr;
+    gap: 1px 1px;
+    grid-template-areas: "topbar" "display" "keys";
+    border: 2px solid darkviolet;
+    border-radius: 12px;
+    border-color: darkviolet;
+}
+
+.topbar {
+    grid-area: topbar;
+    justify-self: end;
+    align-self: center;
+    padding-right: 8px;
+}
+
+.display {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.7fr 1.3fr;
+    gap: 1px 1px;
+    grid-template-areas: "expression" "result";
+    grid-area: display;
+    background-color: darkviolet;
+    color: lavender;
+    padding-right: 20px;
+}
+
+.expression {
+    grid-area: expression;
+    text-align: right;
+    font-size: 18px;
+}
+
+.result {
+    grid-area: result;
+    text-align: right;
+    font-size: 24px;
+}
+
+.keys {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    grid-template-rows: 1fr;
+    gap: 1px 1px;
+    grid-template-areas: "numpad controls";
+    grid-area: keys;
+}
+
+.numpad {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 1px 1px;
+    grid-template-areas: "one two three" "four five six" "seven eight nine" "zero . comma";
+    grid-area: numpad;
+    column-gap: 15px;
+    row-gap: 15px;
+    place-self: center;
+    align-content: stretch;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 1.5fr;
+    gap: 1px 1px;
+    grid-template-areas: "themes" "operations";
+    grid-area: controls;
+}
+
+.themes {
+    grid-area: themes;
+    background-color: grey;
+}
+
+.operations {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1px 1px;
+    grid-template-areas: ". ." ". ." ". .";
+    grid-area: operations;
+    align-items: center;
+
+}
+
+.btn {
+    border-radius: 24px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    padding: 0;
+    position: relative;
+    background-color: lavender;
+    color:indigo;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.btn-close {
+    height: 30px;
+    width: 30px;
+    font-weight: bold;
+    font-size: 16px;
+}

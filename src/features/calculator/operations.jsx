@@ -1,18 +1,21 @@
 
 import React from 'react'
+import Button from '../../components/button'
 
-const Keypad = ({ onGetInput , onCalculate}) => {
-    return (
-<div>
-  <button name="+" onClick={e => onGetInput(e.target.name)}>+</button>
-  <button>-</button>
-  <button>*</button>
-  <button>:</button>
-  <button>,</button>
-  <button onClick={onCalculate}>=</button>
-</div>
-    )
+const Operations = ({ onGetInput, onCalculate, onClear }) => {
+  return (
+    <div className='controls'>
+      <div className='operations'>
+        <Button name="+" onClick={e => onGetInput(e.target.name)} />
+        <Button name="-" onClick={e => onGetInput(e.target.name)} />
+        <Button name="*" onClick={e => onGetInput(e.target.name)} />
+        <Button name=":" onClick={e => onGetInput(e.target.name)} />
+
+        <Button name="=" onClick={onCalculate} />
+        <Button ariaLabel='clear' name='CLC' onClick={onClear} />
+      </div>
+    </div>
+  )
 }
 
-export default Keypad
-  
+export default Operations

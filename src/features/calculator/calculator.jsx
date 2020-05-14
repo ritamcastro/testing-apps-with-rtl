@@ -4,7 +4,6 @@ import Display from './display'
 import Keypad from './keypad'
 import Operations from './operations'
 import Button from '../../components/button'
-
 const Calculator = () => {
 
     const [input, setInput] = useState(undefined)
@@ -18,11 +17,31 @@ const Calculator = () => {
                 setInput(undefined)
                 setOperation(undefined)
                 break
+            case '-':
+                setResult(subtract(parseFloat(result), parseFloat(input)))
+                setInput(undefined)
+                setOperation(undefined)
+                break
+            case '*':
+                setResult(multiply(parseFloat(result), parseFloat(input)))
+                setInput(undefined)
+                setOperation(undefined)
+                break
+            case ':':
+                setResult(divide(parseFloat(result), parseFloat(input)))
+                setInput(undefined)
+                setOperation(undefined)
+                break
             default:
                 break
         }
     }
 
+    const clear = () => {
+        setInput(undefined)
+        setResult(undefined)
+        setOperation(undefined)
+    }
 
     const getInput = (e) => {
         if (input == undefined) {
@@ -47,21 +66,19 @@ const Calculator = () => {
         }
         setInput(undefined)
     }
-    
-    const clear = () => {
-        setInput(undefined)
-        setResult(undefined)
-        setOperation(undefined)
-    }
 
     return (
-        <div>
-            <div>
-                <Button name="X" ariaLabel='close calculator'/>
+        <div className="grid-container" >
+            <div className='topbar'>
+                <Button className='btn-close' name="X" ariaLabel='close calculator' />
             </div>
-            <Display result={result} operation={operation} input={input} onClear={() => clear()}/>
-            <Keypad onGetInput={getInput} />
-            <Operations onGetInput={doOperation} onCalculate={calculate}></Operations>
+            <Display result={result} operation={operation} input={input} onClear={() => clear()} />
+
+            <div className='keys'>
+                <Keypad onGetInput={getInput} />
+                <Operations onGetInput={doOperation} onCalculate={calculate}></Operations>
+            </div>
+
         </div>
     )
 }
