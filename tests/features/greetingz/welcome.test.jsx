@@ -1,9 +1,17 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import Welcome from 'features/greetingz/welcome'
  
+const mockHistoryPush = jest.fn()
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useHistory: () => ({
+        push: mockHistoryPush,
+    }),
+}))
+
 describe('Welcome screen', () => {
 
     describe('initial render', () => {
@@ -28,7 +36,7 @@ describe('Welcome screen', () => {
         })
     })
 
-    it('calls the onSubmit with the username', () => {
+    it('calls the onSubmit with the username', done => {
         // Given
         const handleSubmit = jest.fn()
         const username = 'Mickey Mouse'
@@ -44,5 +52,11 @@ describe('Welcome screen', () => {
         // Then
         expect(handleSubmit).toHaveBeenCalledTimes(1)
         expect(handleSubmit).toHaveBeenCalledWith(username)
+
+        waitFor(() => {
+            expect(mockHistoryPush).toHaveBeenCalledTimes(1)
+            expect(mockHistoryPush).toHaveBeenCalledWith(goto)
+            done()
+        })
     })
 })
