@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
-const Welcome = ({ onSubmit }) => {
+const Welcome = ({ onSubmit, goto }) => {
 
     const [username, setUsername] = useState('')
     const [isEnabled, setEnable] = useState(false)
@@ -9,9 +10,12 @@ const Welcome = ({ onSubmit }) => {
         username.length > 0 ? setEnable(true) : null
     }, [username])
 
+    const history = useHistory()
+
     const handleSubmit = event => {
         event.preventDefault()
         onSubmit(username)
+        history.push(goto)
     }
 
     return (
