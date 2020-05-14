@@ -3,6 +3,7 @@ import { add } from '../../services/math'
 import Display from './display'
 import Keypad from './keypad'
 import Operations from './operations'
+import Button from '../../components/button'
 
 const Calculator = () => {
 
@@ -56,7 +57,7 @@ const Calculator = () => {
     return (
         <div>
             <div>
-                <button aria-label='close calculator'>X</button>
+                <Button name="X" ariaLabel='close calculator'/>
             </div>
             <Display result={result} operation={operation} input={input} onClear={() => clear()}/>
             <Keypad onGetInput={getInput} />

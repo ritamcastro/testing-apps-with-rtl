@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../../components/button'
 
 const Display = ({ result, input, operation, onClear }) => {
     
@@ -8,7 +9,7 @@ const Display = ({ result, input, operation, onClear }) => {
                 {result === undefined && input === undefined ? 0: result} {operation} {input} 
                 </p>
             <h2 aria-label='result'> {result === undefined ? 0 : result}</h2>
-            <button aria-label='clear' onClick={onClear}>CLC</button>
+            <Button ariaLabel='clear' name='CLC' onClick={onClear}/>
         </div>
     )
 }
