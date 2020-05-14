@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-// import Welcome from './features/greetingz/welcome'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Welcome from './features/greetingz/welcome'
 import Calculator from './features/calculator/calculator'
-import Button from './components/button'
+import Goodbye from './features/greetingz/goodbye'
 import { ThemeProvider } from './themes/theme'
-import ThemeToggler from './themes/theme-toggler'
 
 
 const App = () => {
@@ -14,15 +14,16 @@ const App = () => {
     }
 
     return (
-        <div>
-            {/* <Welcome onSubmit={onWelcoming} />
-            {username.length > 0 ? <p> Welcome, {username}!</p> : null} */}
-            {/* <Calculator /> */}
-            <ThemeProvider>
-                <ThemeToggler/>
-                <Button name="Test me!"/>
-            </ThemeProvider>
-        </div>
+        <BrowserRouter>
+            <Switch>
+                <ThemeProvider>
+                    <Route exact path="/" render={() => <Welcome onSubmit={onWelcoming} goto="/calculator" />} />
+                    <Route exact path="/calculator" render={() => <Calculator onCloseGoTo={'/goodbye'} />} />
+                    <Route exact path="/goodbye" render={() => <Goodbye name={username} />} />
+                </ThemeProvider>
+            </Switch>
+        </BrowserRouter>
     )
 }
+
 export default App

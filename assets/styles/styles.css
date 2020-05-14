@@ -81,7 +81,10 @@
 
 .themes {
     grid-area: themes;
-    background-color: grey;
+    font-size: 16px;
+    color: indigo;
+    place-self: center;
+    align-content: stretch;
 }
 
 .operations {
@@ -92,7 +95,6 @@
     grid-template-areas: ". ." ". ." ". .";
     grid-area: operations;
     align-items: center;
-
 }
 
 .btn {

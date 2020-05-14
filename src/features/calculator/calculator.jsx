@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { add } from '../../services/math'
+import { add, subtract, multiply, divide } from '../../services/math'
 import Display from './display'
 import Keypad from './keypad'
 import Operations from './operations'
@@ -83,7 +83,10 @@ const Calculator = ({ onCloseGoTo }) => {
 
             <div className='keys'>
                 <Keypad onGetInput={getInput} />
-                <Operations onGetInput={doOperation} onCalculate={calculate}></Operations>
+                <Operations
+                    onGetInput={doOperation}
+                    onCalculate={() => calculate()}
+                    onClear={() => clear()}/>
             </div>
         </div>
     )
