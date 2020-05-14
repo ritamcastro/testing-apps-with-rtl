@@ -21,7 +21,7 @@ describe('Button', () => {
         })
     })
 
-    it ('renders with the light styles for the light theme', () => {
+    fit ('renders with the light styles for the light theme', () => {
         const Wrapper = ({ children }) => (
             <ThemeProvider initialTheme="light">{children}</ThemeProvider>
         )
@@ -29,8 +29,8 @@ describe('Button', () => {
         const { getByText } = render(<Button name="Sunshine"/>, { wrapper: Wrapper })
         const button = getByText(/sunshine/i)
         expect(button).toHaveStyle(`
-              background-color: white;
-              color: black;
+              background-color: lavender;
+              color: indigo;
             `)
     })
 })
