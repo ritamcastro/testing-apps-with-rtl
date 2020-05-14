@@ -1,14 +1,21 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { add } from '../../services/math'
 import Display from './display'
 import Keypad from './keypad'
 import Operations from './operations'
 import Button from '../../components/button'
-const Calculator = () => {
+
+const Calculator = ({ onCloseGoTo }) => {
 
     const [input, setInput] = useState(undefined)
     const [result, setResult] = useState(undefined)
     const [operation, setOperation] = useState(undefined)
+
+    const history = useHistory()
+    const closeCalculator = () => {
+        history.push(onCloseGoTo)
+    }
 
     const calculate = () => {
         switch (operation) {
@@ -70,7 +77,7 @@ const Calculator = () => {
     return (
         <div className="grid-container" >
             <div className='topbar'>
-                <Button className='btn-close' name="X" ariaLabel='close calculator' />
+                <Button className='btn-close' name="X" ariaLabel='close calculator' onClick={() => closeCalculator()} />
             </div>
             <Display result={result} operation={operation} input={input} onClear={() => clear()} />
 
@@ -78,7 +85,6 @@ const Calculator = () => {
                 <Keypad onGetInput={getInput} />
                 <Operations onGetInput={doOperation} onCalculate={calculate}></Operations>
             </div>
-
         </div>
     )
 }
