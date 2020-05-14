@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import '@testing-library/jest-dom/extend-expect'
 import { render, waitFor} from '@testing-library/react'
-import Goodbye from '../../src/features/goodbye'
+import Goodbye from 'features/greetingz/goodbye'
 
 describe('Goodbye screen', () => {
 
@@ -15,7 +15,7 @@ describe('Goodbye screen', () => {
     it('shows the joke', done => {
 
         axios.get = jest.fn((...args) => {
-            console.warn('window.fetch is not mocked for this call', ...args)
+            console.warn('axios.get is not mocked for this call', ...args)
             return Promise.reject(new Error('This must be mocked!'))
         })
 

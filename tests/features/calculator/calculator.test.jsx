@@ -5,6 +5,14 @@ import { waitFor } from '@testing-library/react'
 import Calculator from 'features/calculator/calculator'
 import { renderWithTheme } from '../../test-utils'
 
+const mockHistoryPush = jest.fn()
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useHistory: () => ({
+        push: mockHistoryPush,
+    }),
+}))
+
 describe('Calculator', () => {
 
     describe('initial render', () => {
@@ -36,6 +44,21 @@ describe('Calculator', () => {
         it('shows the clear button', () => {
             const { getByRole } = renderWithTheme(<Calculator />)
             expect(getByRole('button', { name: /clear/i })).toBeInTheDocument()
+        })
+
+        it('has a button to close the calculator', done => {
+            const takeMePlaces = "somewheeeeeere, over the 🌈"
+            const { getByLabelText } = renderWithTheme(<Calculator onCloseGoTo={takeMePlaces} />)
+
+            const close = getByLabelText(/close calculator/i)
+            expect(close).toBeInTheDocument()
+            userEvent.click(close)
+
+            waitFor(() => {
+                expect(mockHistoryPush).toHaveBeenCalledTimes(1)
+                expect(mockHistoryPush).toHaveBeenCalledWith(takeMePlaces)
+                done()
+            })
         })
     })
 
