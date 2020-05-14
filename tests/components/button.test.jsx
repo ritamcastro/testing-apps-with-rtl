@@ -1,17 +1,11 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
-import { render, waitFor } from '@testing-library/react'
-import { ThemeProvider } from '../../src/themes/theme'
+import { waitFor } from '@testing-library/react'
 import Button from '../../src/components/button'
+import {renderWithTheme} from '../test-utils'
 
 describe('Button', () => {
-    function renderWithTheme(ui, theme = 'light') {
-        const Wrapper = ({ children }) => (
-            <ThemeProvider value={[theme, () => { }]}>{children}</ThemeProvider>
-        )
-        return render(ui, { wrapper: Wrapper })
-    }
 
     it('renders the name and when clicked, calls the callback', done => {
         const doStuff = jest.fn()
