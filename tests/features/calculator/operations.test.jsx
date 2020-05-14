@@ -1,6 +1,6 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import Operations from "../../../src/features/calculator/operations"
+import Operations from 'features/calculator/operations'
 import { renderWithTheme } from '../../test-utils'
 
 describe('Operations', () => {

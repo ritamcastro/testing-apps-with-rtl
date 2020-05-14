@@ -1,7 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { renderWithTheme } from '../../test-utils'
-import Keypad from "../../../src/features/calculator/keypad"
+import Keypad from "features/calculator/keypad"
 
 describe('Keypad', () => {
     it('shows the numbers from 0-9 and ,', () => {

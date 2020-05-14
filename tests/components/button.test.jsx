@@ -2,7 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 import { waitFor } from '@testing-library/react'
-import Button from '../../src/components/button'
+import Button from 'components/button'
 import {renderWithTheme} from '../test-utils'
 
 describe('Button', () => {

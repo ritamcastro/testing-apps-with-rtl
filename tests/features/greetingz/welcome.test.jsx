@@ -2,7 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 import { render } from '@testing-library/react'
-import Welcome from '../../../src/features/greetingz/welcome'
+import Welcome from 'features/greetingz/welcome'
  
 describe('Welcome screen', () => {
 

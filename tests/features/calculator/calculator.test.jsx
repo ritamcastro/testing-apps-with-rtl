@@ -2,7 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 import { waitFor } from '@testing-library/react'
-import Calculator from '../../../src/features/calculator/calculator'
+import Calculator from 'features/calculator/calculator'
 import { renderWithTheme } from '../../test-utils'
 
 describe('Calculator', () => {
