@@ -1,11 +1,11 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render } from '@testing-library/react'
+import { renderWithTheme } from '../../test-utils'
 import Keypad from "../../../src/features/calculator/keypad"
 
 describe('Keypad', () => {
     it('shows the numbers from 0-9 and ,', () => {
-        const { getByRole } = render(<Keypad />)
+        const { getByRole } = renderWithTheme(<Keypad />)
     
         expect(getByRole('button', { name: /0/i })).toBeInTheDocument()
         expect(getByRole('button', { name: /1/i })).toBeInTheDocument()
