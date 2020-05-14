@@ -9,7 +9,11 @@ describe('Button', () => {
     it('renders the name and when clicked, calls the callback' , done => {
         const doStuff = jest.fn()
         const btnName = "Click Me!"
-        const {getByRole} = render(<Button name={btnName} onClick={doStuff}></Button>)
+        
+        const Wrapper = ({ children }) => (
+            <ThemeProvider initialTheme="light">{children}</ThemeProvider>
+        )
+        const {getByRole} = render(<Button name={btnName} onClick={doStuff}></Button>, { wrapper: Wrapper })
 
         const btn = getByRole('button', {name: btnName})
         expect(btn).toBeInTheDocument()
@@ -21,12 +25,12 @@ describe('Button', () => {
         })
     })
 
-    fit ('renders with the light styles for the light theme', () => {
+    it ('renders with the light styles for the light theme', () => {
         const Wrapper = ({ children }) => (
             <ThemeProvider initialTheme="light">{children}</ThemeProvider>
         )
-
         const { getByText } = render(<Button name="Sunshine"/>, { wrapper: Wrapper })
+
         const button = getByText(/sunshine/i)
         expect(button).toHaveStyle(`
               background-color: lavender;
